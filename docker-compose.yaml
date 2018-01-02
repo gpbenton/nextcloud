@@ -1,7 +1,7 @@
 version: '2'
 
 volumes:
-  nextcloud:
+  data_dir:
   db:
 
 services:
@@ -26,8 +26,10 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_HOST: db
+      NEXTCLOUD_ADMIN_USER: ${NEXTCLOUD_ADMIN_USER}
+      NEXTCLOUD_ADMIN_PASSWORD: ${NEXTCLOUD_ADMIN_PASSWORD}
     depends_on:
       - db
     volumes:
-      - nextcloud:/var/www/html
+      - data_dir:/var/www/html
     restart: always
