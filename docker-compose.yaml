@@ -33,3 +33,11 @@ services:
     volumes:
       - data_dir:/var/www/html
     restart: always
+    networks:
+      - caddy
+      - default
+
+networks:
+    caddy:
+        external:
+            name: caddy_default
