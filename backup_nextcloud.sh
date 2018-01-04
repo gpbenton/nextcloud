@@ -3,7 +3,7 @@
 # backup volumes to my mega.nz account
 
 docker pause nextcloud_app_1
-docker exec nextcloud_db_1 pg_dump --oids --username=nextcloud nextcloud |bzip2 > /tmp/nextcloud_db_$(date +%Y%m%d).txt.bz2
+docker exec nextcloud_db_1 pg_dump --username=nextcloud nextcloud |bzip2 > /tmp/nextcloud_db_$(date +%Y%m%d).txt.bz2
 docker run -v nextcloud_data_dir:/volume -v /tmp:/backup --rm loomchild/volume-backup backup nextcloud_data_dir_$(date +%Y%m%d)
 docker unpause nextcloud_app_1
 megaput --no-progress --path=/Root/$(uname -n) /tmp/nextcloud_db_$(date +%Y%m%d).txt.bz2
