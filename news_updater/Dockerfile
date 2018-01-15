@@ -1,4 +1,4 @@
-FROM python:alpine
+FROM python:3.6
 
 RUN pip install --upgrade nextcloud_news_updater --install-option="--install-scripts=/usr/bin"
 
