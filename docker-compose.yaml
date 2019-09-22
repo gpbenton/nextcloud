@@ -6,28 +6,23 @@ volumes:
 
 services:
   db:
-    image: "postgres:10-alpine"
+    image: "postgres:11-alpine"
+    restart: always
     volumes:
       - "db:/var/lib/postgresql/data"
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
-    restart: always
-    expose: 
-      - "5432"
 
   app:
-    image: "nextcloud:fpm"
-    links:
-      - db
+    image: "nextcloud:fpm-alpine"
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_DB: nextcloud
       POSTGRES_HOST: db
       NEXTCLOUD_ADMIN_USER: ${NEXTCLOUD_ADMIN_USER}
       NEXTCLOUD_ADMIN_PASSWORD: ${NEXTCLOUD_ADMIN_PASSWORD}
+      NEXTCLOUD_TRUSTED_DOMAINS: ${NEXTCLOUD_TRUSTED_DOMAINS}
     depends_on:
       - db
     volumes:
