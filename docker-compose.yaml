@@ -6,7 +6,7 @@ volumes:
 
 services:
   db:
-    image: "postgres:alpine"
+    image: "postgres:10-alpine"
     volumes:
       - "db:/var/lib/postgresql/data"
     environment:
@@ -18,7 +18,7 @@ services:
       - "5432"
 
   app:
-    image: "i386/nextcloud:fpm"
+    image: "nextcloud:fpm"
     links:
       - db
     environment:
