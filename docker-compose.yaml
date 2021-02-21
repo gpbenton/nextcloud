@@ -27,6 +27,7 @@ services:
       - db
     volumes:
       - data_dir:/var/www/html
+      - $PWD/wwx.conf:/usr/local/etc/php-fpm.d/wwx.conf:ro
     restart: always
     networks:
       - caddy
